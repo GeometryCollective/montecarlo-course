@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+	<html lang="en">	
+	<head>
+		<title>Monte Carlo Methods and Applications</title>
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+	</head>
+	<body style="width: 800px;margin:auto;">
+		<div data-markdown>
+# Monte Carlo Methods and Applications
+## 21-387 | 15-327 | 15-627 | 15-860 FALL 2023
+
+**Instructors:** Keenan Crane (CSD/RI) and Gautam Iyer (MSC)
+
+**Units:** **9** (3 in-class/6 outside)
+
+### Course Description
+
+The Monte Carlo method uses random sampling to solve computational problems that would otherwise be intractable, and enables computers to model complex systems in nature that are otherwise too difficult to simulate.  This course provides a first introduction to Monte Carlo methods from complementary theoretical and applied points of view, and will include implementation of practical algorithms.  Topics include random number generation, sampling, Markov chains, Monte Carlo integration, stochastic processes, and applications in computational science.  Students need a basic background in probability, multivariable calculus, and some coding experience in any language.
+
+### Course Relevance
+
+_How is this course relevant to the targeted student populations?_
+
+Random numbers are a basic tool for achieving robustness, scalability, and correctness in the design of algorithms.  Moreover, randomness is an essential part of models used to describe the behavior of systems found throughout science, technology, and engineering.  The Monte Carlo method in particular was recognized by SIAM as one of the [most important 10 algorithms of the 20th century](http://pi.math.cornell.edu/~web6140/).  Yet foundational and practical aspects of such methods are not currently covered in depth by any course at CMU.  This course complements the existing curriculum, helping to better prepare students to apply randomness to problem solving in both academic and industrial settings.
+
+### Key Topics
+
+_What are the key subject topics that this course will cover?_
+
+definitions of randomness, random number generation, randomness testing and quality measures, curse of dimensionality, sampling and aliasing, Markov chains, Monte Carlo methods, stochastic processes, sample generation algorithms, applications of random numbers in computation
+
+
+### Course Goals
+
+_What are the overall goals of this course that students will achieve after completing it?_
+
+The goal of this course is to enable students to identify situations where random sampling provides the best solution to a computational/algorithmic problem, and to train them in the practical implementation of associated methods.  Students should also acquire the mathematical background needed to derive new algorithms from first principles, rather than purely applying existing techniques, and to analyze the correctness and efficiency of these algorithms.  (For example, they should be able to determine whether a given Monte Carlo estimator is unbiased, and measure the empirical efficiency of such algorithms in terms of statistics such as variance.)
+
+A secondary goal of this course is to expose students to a collection of application areas in computer science and the broader sciences where randomness can be profitably applied.  In computer science, this set includes problems in computer systems/networking, programming languages, theoretical computer science, artificial intelligence/machine learning, and computer graphics.  In the broader sciences, this includes partial differential equations arising in physics/chemistry/biology/etc., and stochastic models appearing in mathematical finance.
+
+### Prerequisite Knowledge
+
+_What prior knowledge must students have in order to be successful in this course?_
+
+Students must have basic knowledge of coding (in any language), as well as basic knowledge of probability and multivariable calculus.  CMU courses satisfy the prerequisites are listed below; please contact the instructors if you believe you've taken a different course that fulfills the requirement.
+
+**Probability:** 15-259 or 15-659 or 21-325 or 21-721 or 36-218 or 36-219 or 36-225 or 36-235 or 36-700 or 45-750 or 18-465 or 18-665
+
+**Multivariable Calculus:** 21-254 or 21-256 or 21-259 or 21-266 or 21-268 or 21-269
+
+<!--
+### Tentative Syllabus
+
+_Note: dates and topics are subject to revision._
+
+- _29 Aug (Tue)_ — **Lecture 01: Why randomness?**
+   - Why is randomness useful for computation?
+      - **Robustness:** guards against adversarial behavior (e.g., shuffling a deck of cards) or pathological behavior (e.g., flipping a coin to break ties).
+      - **Scalability:** can provide meaningful information without inspecting all the data (e.g., exit polling).
+      - **Correctness:** avoid aliasing/discretization error (Nyquist-Shannon).
+   - Quick look at examples from different areas of computer science (systems/networking, ML/artificial intelligence, theoretical CS, programming languages, computer graphics)
+- _31 Aug (Thu)_ — **Lecture 02: Probability Review**
+      - random variables, PDF, CDF, independence, expected value, variance, conditional expectation, Bayes' theorem, etc.
+- _05 Sep (Tue)_ — **Lecture 03: What is randomness?**
+      - Do "true" random numbers really exist? (See: [Abel Prize lecture by Avi Wigderson](https://www.youtube.com/watch?v=Jz1UoAWD80Q))
+      - How do we measure that quality of random numbers?
+         - Quality metrics for cryptography/security
+         - Quality metrics for simulation/numerics
+         - Tests of randomness (entropy, Kolmogorov-Smirnov, Ward-Wolfowitz, spectral, etc.)
+      - How do we generate uniformly distributed (pseudo-)random numbers?
+         - physical sources of entropy
+         - algorithms for pseudorandom number generation
+- _07 Sep (Thu)_ — **Lecture 04: Sample generation**.
+      - Given a (discrete or continuous) probability distribution, how do we (approximately) generate samples from this distribution?
+      - In some cases (e.g., normal distribution) there are simple answers
+         - rejection sampling, inversion method, Box-Muller, etc.
+      - In other situations, this question is at the core of many challenging computational tasks!
+- _12 Sep (Tue)_ — **Lecture 05: Monte Carlo Integration**
+      - Traditional quadrature
+      - Curse of dimensionality
+      - Monte Carlo estimators
+      - law of large numbers
+      - consistency and bias
+      - estimator variance
+- _14 Sep (Thu)_ — **Lecture 06: Monte Carlo Acceleration Strategies I**
+      - importance sampling
+      - multiple importance sampling (MIS)
+      - stratification
+- _19 Sep (Tue)_ — **Lecture 07: Monte Carlo Acceleration Strategies II**
+      - control variates
+      - multi-level Monte Carlo (MLMC)
+      - quasi-Monte Carlo (QMC)
+- _21 Sep (Thu)_ — **Lecture 08: Markov Chains**
+- _26 Sep (Tue)_ — **Lecture 09: Markov Chain Monte Carlo**
+      - Metropolis-Hastings algorithm
+      - Gibbs Sampling
+      - Langevin Monte Carlo (LMC)
+      - Hamiltonian Monte Carlo (HMC)
+- _28 Sep (Thu)_ — **Lecture 10: Stochastic Processes**
+      - Brownian motion, sample space, martingales
+- _03 Oct (Tue)_ — **Lecture 11: Stochastic Integration I**
+      - first and quadratic variation, Ito integral, semi-martingales, Ito's formula
+- _05 Oct (Thu)_ — **Lecture 12: Stochastic Integration II**
+      - multi-dimensional Ito calculus, Girsanov theorem, stochastic differential equations (SDEs)
+- _10 Oct (Tue)_ — **Lecture 13: SDE Integrators**
+      - deterministic integrators (forward Euler, Runge-Kutta, ...), SDE integrators (Euler-Maruyama, ...)
+- _12 Oct (Thu)_ — **Lecture 14: Partial Differential Equations**
+      - elliptic PDEs, Dirichlet and Neumann boundary conditions
+- _24 Oct (Tue)_ — **Lecture 15: Stochastic Integral Equations**
+      - integral representations, Kakutani's principle, Feynman-Kac formula
+- _26 Oct (Thu)_ — **Lecture 16: Application: Photorealistic Image Generation / Monte Carlo ray tracing I**
+      - path tracing, bidirectional path tracing
+- _31 Oct (Tue)_ — **Lecture 17: Application: Photorealistic Image Generation / Monte Carlo ray tracing II**
+      - Metropolis light transport, recent developments
+- _02 Nov (Thu)_ — **Lecture 18: Application:** Partial Differential Equations / walk on spheres I
+- _07 Nov (Tue)_ — **Lecture 19: Application:** Partial Differential Equations / walk on spheres II
+- _09 Nov (Thu)_ — **Lecture 20: Application:** Partial Differential Equations / walk on spheres III
+- _14 Nov (Tue)_ — **Lecture 21: Application:** Neural Networks / stochastic gradient descent
+- _16 Nov (Thu)_ — **Lecture 22: Application:** Text-to-Image Models / stable diffusion
+- _21 Nov (Tue)_ — **Lecture 23: Application:** Cryptography / primality testing
+- _28 Nov (Tue)_ — **Lecture 24: Application:** Networking / queueing theory
+- _30 Nov (Thu)_ — **Lecture 25: Application:** Programming Languages / probabilistic programming
+- _05 Dec (Tue)_ — **Lecture 26: Application:** Computational Finance / Black-Scholes equation
+- _07 Dec (Thu)_ — **Lecture 27: Application:** Games / Monte Carlo tree search
+-->
+
+<!--
+### Assignments (Tentative)
+
+- **A1: Random Number Generation**
+- **A2: Monte Carlo Integration**
+- **A3: Random Sampling**
+- **A4: SDE Integration**
+-->
+
+### Accommodations for Students with Disabilities
+
+If you have a disability and have an accommodations letter from the
+Disability Resources office, I encourage you to discuss your
+accommodations and needs with me as early in the semester as
+possible. I will work with you to ensure that accommodations are
+provided as appropriate. If you suspect that you may have a
+disability and would benefit from accommodations but are not yet
+registered with the Office of Disability Resources, I encourage you
+to contact them at [access@andrew.cmu.edu](mailto:access@andrew.cmu.edu).
+
+### Student Wellness
+
+As a student, you may experience a range of challenges that can
+interfere with learning, such as strained relationships, increased
+anxiety, substance use, feeling down, difficulty concentrating
+and/or lack of motivation. These mental health concerns or stressful
+events may diminish your academic performance and/or reduce your
+ability to participate in daily activities. CMU services are
+available, and treatment does work. You can learn more about
+confidential mental health services available on campus
+[here](http://www.cmu.edu/counseling). Support is always available
+(24/7) from Counseling and Psychological Services: 412-268-2922.
+
+### Final Project
+
+Students are free to choose their own topic for the final project, but we will provide a variety of suggested topics to get them started.  The basic task is to identify and implement an algorithm in the chosen topic area; students will also need to turn in a detailed writeup (more detail below).  Note that two of these topics are covered in class (ray tracing and walk on spheres); we expect students who choose these topics to go deeper than the basic algorithms presented in lecture.
+
+#### Topic suggestion: Monte Carlo Ray Tracing
+
+![Monte Carlo Ray Tracing example](images/RayTracing.jpg)
+
+_Ray tracing_ is the basic algorithm used to synthesize photorealistic images from digital descriptions of a 3D scene.  This kind of image synthesis powers a rich variety of applications ranging from architectural pre-visualization, to 3D reconstruction from photographs, to computer-generated imagery for movies.  The starting point for ray tracing is a recursive integral equation, called the _rendering equation_.  Even in simple scenarios, these integrals are impossible to evaluate directly, and must be approximated via recursive application of Monte Carlo integration.  As with all Monte Carlo methods, the main challenge is to improve efficiency by getting more accurate approximation of the integrals using fewer, cheaper samples.  For this project you could implement any number of variance reduction/acceleration strategies from the Monte Carlo and MCMC literature.  Note that your project should _not_ center on other aspects of rendering (e.g., more sophisticated material models), but must focus on ways of making randomized computation more efficient.
+
+#### Topic suggestion: Walk on Spheres
+
+![Walk on spheres example](images/WalkOnSpheres.jpg)
+
+The _walk on spheres (WoS)_ algorithm is a method for solving partial differential equations (PDEs), especially well-suited to problems with complex geometry and/or challenging material coefficients.  PDEs are used to model phenomena throughout science engineering, say, thermal analysis of a heat sink or combustion engine, oxygen diffusion in the lungs, or fluid flow around an airplane.  WoS side-steps many of the challenges of traditional PDE solvers (such as finite element mesh generation), and has a flavor very similar to Monte Carlo ray tracing: estimate the solution to an integral equation via recursive application of the Monte Carlo method.  For this project you could implement more sophisticated WoS methods from the literature, add variance reduction techniques for WoS, or you could try to develop new estimators for different classes of PDEs (say, the Helmholtz equation or Robin boundary conditions).
+
+#### Topic suggestion: Stochastic Optimization
+
+![Stochastic optimization example](images/StochasticDescent.jpg)
+
+Numerical optimization methods like _stochastic gradient descent (SGD)_ are a central part of modern methods for machine learning.  Since these problems typically involve massive data sets, and models with an enormous number of parameters, random sampling is needed to make computation feasible.  In contrast to ordinary gradient descent, which minimizes an objective by following the direction of steepest descent, SGD approximates the gradient direction using random sampling.  The quality of this approximation in turn affects the rate of convergence—and ultimately, the performance of the model.  For this project you should implement at least two stochastic optimization techniques (e.g., SGD and ADAM) and/or acceleration/variance reduction techniques for these methods, and compare their performance on a training task.  Alternatively, you could compare the performance of deterministic and stochastic methods (e.g., SGD and L-BFGS) on a smaller-scale optimization problem (which may be easier to run on a personal computer!), and try to improve the performance of the stochastic algorithm to better compete with the deterministic method.
+
+#### Topic suggestion: Stable Diffusion
+
+![Stable diffusion example](images/StableDiffusion.jpg)
+
+In recent years, _stable diffusion_ models have been used to build impressive image synthesis systems, such as [DALL-E 2](https://openai.com/dall-e-2/), which generates a plausible image from a short text description.  At the core of stable diffusion models are _reverse_ SDEs: in a nutshell, a given data set (say, photographs of cats) are corrupted by random diffusion, and a neural network is trained to reverse this diffusion process---making it possible to ``un-corrupt'' any random signal into a nearby plausible image.  Given the cost and complexity of implementing and running such models, it is probably sufficient for this project to implement a simple stable diffusion model, and run it on an existing data set.  You could also try, for instance, to implement stable diffusion on a different domain (say, meshes instead of images), or think about how variance reduction strategies can be applied to improve the performance of existing stable diffusion models.
+
+#### Topic suggestion: Monte Carlo Tree Search
+
+![Monte Carlo tree search example](images/MonteCarloTreeSearch.jpg)
+
+In recent years, systems such as [Alpha Go Zero](https://www.deepmind.com/blog/alphago-zero-starting-from-scratch) have made major leaps in the ability of computers to play games—and defeat human experts.  Although much of the press hype surrounding such systems has focused on neural networks, the [real workhorse](https://joshvarty.github.io/AlphaZero/) in many of these methods is _Monte Carlo tree search (MCTS)_.  The basic observation is that, although there are typically an enormous number of possible games that can be played (e.g., about [10<sup>120</sup>](https://en.wikipedia.org/wiki/Shannon_number) in a game of chess!), randomly sampling a _much_ smaller number of games and evaluating the final score can provide remarkably good information for developing a strategy.  For this project you should implement MCTS for a game _other than Chess or Go_ (say, [checkers](https://en.wikipedia.org/wiki/Checkers), [gomoku](https://en.wikipedia.org/wiki/Gomoku), or [connect four](https://en.wikipedia.org/wiki/Connect_Four)).  You should also implement at least one basic variance reduction strategy, and compare the performance of your search with/without this strategy (e.g., by playing your AI against itself).
+
+#### Topic suggestion: Numerical Linear Algebra
+
+![Numerical linear algebra example](images/NumericalLinearAlgebra.jpg)
+
+An enormous number of tasks in computational science reduce to solving matrix equations encoding large linear systems (e.g., electronic structure calculations, finite element solvers, analysis of large social networks, etc.).  As the size of these matrices grows, solving these systems deterministically becomes extremely challenging—for instance, many of the world's largest supercomputers are devoted to solving such systems.  However, for many types of linear systems a solution can still be reliably estimated via random sampling.  For this project you should implement a randomized method for one type of matrix problem (e.g., solving a linear system, solving an eigenvalue problem, or applying the exponential map), and compare your stochastic solver with a deterministic solver in terms of accuracy and performance with respect to problem size.  You should also think about how to improve your estimates using, e.g., variance reduction and acceleration strategies discussed in class.
+
+#### Topic suggestion: Natural Language Models
+
+![Language example](images/LanguageExample.jpg)
+
+Natural language is a powerful tool for human-computer interaction; synthesizing and interpreting natural language is the basis for a variety of technologies ranging from simple autocomplete/next-word prediction to home assistants like Amazon Alexa and Apple's Siri.  In recent years especially, large language models like GPT-3 have provided impressive examples of large-scale text synthesis.  For this project you should start at the beginning, and implement a simpler language model, e.g., next-word prediction using a basic Markov chain model (since such models can be efficiently trained on a personal computer).  You should also explore techniques for improving your language model over the basic version, e.g., comparing a 1st-order and 2nd-order Markov chain model.  Finally, it would be fun to compare the performance of your simple model to state-of-the-art models like ChatGPT (e.g., by having both models complete a set of sentences).
+
+### Assessment Structure
+
+_How will students be assessed in this course: assignments, exams, final, presentation, project, etc.?  (Weighted values are extremely helpful, i.e. homeworks 15%, quizzes 15%, mid-term exam 30%, final exam 40%)_
+
+The assessment breakdown is as follows:
+
+- (37%) written exercises
+- (37%) coding assignments
+- (20%) final project
+- (6%) class participation
+
+There will be four (4) assignments over the first half of the semester, which help establish an understanding of basic principles and how they are applied computationally.  A final project during the second half of the semester enables students to go deeper in one particular application area of interest---we will suggest a variety of projects, but students are free to design their own.  Each assignment is comprised of complementary written and coding components.  Written exercises guide students through derivation of basic knowledge needed to develop and implement algorithms in the coding part.  To help make the course accessible to non-CS majors, coding exercises will be carried out in Python, via web-based Jupyter notebooks.  For the final project, students will implement an existing algorithm in their chosen topic area; more ambitious students are encouraged to think about how to improve on existing algorithms.  In addition to an implementation, the final report for each project must include a writeup that motivates the problem, describes the algorithmic solution and any relevant implementation details, provides plots/data that verify correctness of the implementation, and visualizes results of running the algorithm.  The course also encourages student-instructor and student-student engagement with material through in-class discussions, as well as discussions through Piazza and a private class Discord; activity in these settings will be used to evaluate the class participation grade.
+
+
+### Learning Resources
+
+_What resources will be available for students: web pages, learning applications, texts, case studies, etc.?_
+
+The primary resource for the course are a collection of course notes written by the instructors.  Students will also be given ancillary references to classic texts (e.g., Øksendal and Pharr et al).
+
+
+### Extra Time Commitments
+
+_Are there extra time commitments required outside of the regularly scheduled course meeting times?  Estimated hours per (day) (week)_
+
+The main extra time commitments are written/coding exercises, and studying for midterm/final exams.  The estimated number of out-of-class hours is four hours/week.
+
+
+### Course Tags
+
+_Keywords referencing general topics and/or course structure:_
+
+- Communication
+- Discussion Intensive
+- Diversity
+- Entrepreneurship
+- Ethics
+- Global
+- IDeATe
+- Independent Study
+- **Interdisciplinary**
+- Lab Component
+- Maker
+- Reading Intensive
+- **Research**
+- Service Learning
+- Sustainability/Environment
+- Team Project
+- Writing Intensive
+- **for Non-Majors**
+
+		</div>
+
+		<hr/>
+
+                This page rendered with <a href="https://showdownjs.com/">showdownjs</a>.
+
+
+		<script type="text/javascript">
+			window.onload=function(){
+				// this function is the reverse version of escapeHTML found at 
+				// https://github.com/evilstreak/markdown-js/blob/master/src/render_tree.js
+				function unescapeHTML( text ) {
+				    return text.replace( /&amp;/g, "&" )
+				               .replace( /&lt;/g, "<" )
+				               .replace( /&gt;/g, ">" )
+				               .replace( /&quot;/g, "\"" )
+				               .replace( /&#39;/g, "'" );
+				  }
+
+				// based on https://gist.github.com/paulirish/1343518
+				(function(){
+					[].forEach.call( document.querySelectorAll('[data-markdown]'), function fn(elem){
+						elem.innerHTML = (new Showdown.converter()).makeHtml(unescapeHTML(elem.innerHTML));
+					});
+				}());
+			}
+		</script>
+	</body>
+</html>
